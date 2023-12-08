@@ -1,10 +1,7 @@
-import mongoose from "mongoose";
 import ExpenseModel from "../models/expense.js";
 
 const ADD_EXPENSE = async (req, res) => {
   try {
-    console.log(req.body);
-
     const expense = new ExpenseModel({
       title: req.body.title,
       type: req.body.type,
@@ -16,7 +13,7 @@ const ADD_EXPENSE = async (req, res) => {
 
     const response = await expense.save();
 
-    return res.status(200).json({ response: response });
+    return res.status(201).json({ response: response });
   } catch (err) {
     console.log("ERR:", err);
   }
