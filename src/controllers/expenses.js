@@ -2,18 +2,24 @@ import mongoose from "mongoose";
 import ExpenseModel from "../models/expense.js";
 
 const ADD_EXPENSE = async (req, res) => {
-  const expense = new ExpenseModel({
-    title: req.body.title,
-    type: req.body.type,
-    amount: req.body.amount,
-    description: req.body.description,
-    photo_url: req.body.photo_url,
-    owner_id: req.body.owner_id,
-  });
+  try {
+    console.log(req.body);
 
-  const response = await expense.save();
+    const expense = new ExpenseModel({
+      title: req.body.title,
+      type: req.body.type,
+      amount: Number(req.body.amount),
+      description: req.body.description,
+      photo_url: req.body.photo_url,
+      owner_id: "owner_id",
+    });
 
-  return res.status(200).json({ response: response });
+    const response = await expense.save();
+
+    return res.status(200).json({ response: response });
+  } catch (err) {
+    console.log("ERR:", err);
+  }
 };
 
 const GET_EXPENSES = async (req, res) => {
