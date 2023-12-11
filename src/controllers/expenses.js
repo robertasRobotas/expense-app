@@ -8,7 +8,7 @@ const ADD_EXPENSE = async (req, res) => {
       amount: Number(req.body.amount),
       description: req.body.description,
       photo_url: req.body.photo_url,
-      owner_id: "owner_id",
+      owner_id: req.body.userId,
     });
 
     const response = await expense.save();
@@ -20,7 +20,7 @@ const ADD_EXPENSE = async (req, res) => {
 };
 
 const GET_EXPENSES = async (req, res) => {
-  const expenses = await ExpenseModel.find();
+  const expenses = await ExpenseModel.find({ owner_id: req.body.userId });
   return res.status(200).json({ expenses: expenses });
 };
 

@@ -10,9 +10,9 @@ import auth from "../middleware/auth.js";
 const router = express.Router();
 
 router.post("/expenses", auth, ADD_EXPENSE);
-router.get("/expenses", GET_EXPENSES);
+router.get("/expenses", auth, GET_EXPENSES);
 //req.params.id
-router.get("/expenses/:id", GET_EXPENSE_BY_ID);
-router.delete("/expenses/:id", DELETE_EXPENSE);
+router.get("/expenses/:id", auth, GET_EXPENSE_BY_ID);
+router.delete("/expenses/:id", auth, DELETE_EXPENSE);
 
 export default router;
