@@ -16,12 +16,18 @@ const ADD_EXPENSE = async (req, res) => {
     return res.status(201).json({ response: response });
   } catch (err) {
     console.log("ERR:", err);
+    return res.status(500).json({ message: "error happened" });
   }
 };
 
 const GET_EXPENSES = async (req, res) => {
-  const expenses = await ExpenseModel.find({ owner_id: req.body.userId });
-  return res.status(200).json({ expenses: expenses });
+  try {
+    const expenses = await ExpenseModel.find({ owner_id: req.body.userId });
+    return res.status(200).json({ expenses: expenses });
+  } catch (err) {
+    console.log("ERR:", err);
+    return res.status(500).json({ message: "error happened" });
+  }
 };
 
 const GET_EXPENSE_BY_ID = async (req, res) => {
